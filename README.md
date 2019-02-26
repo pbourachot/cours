@@ -1,2 +1,2 @@
-# cours
+# Cours
 Python cours
