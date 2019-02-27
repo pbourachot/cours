@@ -3,6 +3,9 @@ import random
 import pickle
 
 from random import randrange
+import os.path
+
+FILE_QUESTION = os.path.join(os.path.dirname(os.path.abspath(__file__)),'question.csv')
 
 class Question:
 
@@ -47,7 +50,8 @@ def lireQ():
 
 def lireQcsv():
     quest = Questionnaire()
-    fichier=open('question.csv')
+    print(FILE_QUESTION)
+    fichier=open(FILE_QUESTION)
     lignes=fichier.readlines()
     fichier.close()
     print(lignes)

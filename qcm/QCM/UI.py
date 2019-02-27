@@ -4,6 +4,10 @@ import tkinter
 import tkinter.ttk as ttk
 import Questions
 from tkinter.messagebox import showinfo,showerror
+import os.path
+
+
+FILE_QUESTION = os.path.join(os.path.dirname(os.path.abspath(__file__)),'question.csv')
 
 
 root = tkinter.Tk()
@@ -47,17 +51,31 @@ class QuestionUI:
         # Menu
         menubar = tkinter.Menu(root)
         partiebar = tkinter.Menu(menubar,tearoff=0)
+
+        apropos = tkinter.Menu(menubar,tearoff=0)
         
         menubar.add_cascade(label="Partie", menu=partiebar)
         partiebar.add_command(label="Nouvelle Partie", command=self.nouvellePartie)
         partiebar.add_separator()
+        partiebar.add_command(label="Propriete", command=self.propriete)
+        partiebar.add_separator()
         partiebar.add_command(label="Quitter", command=self.quitter)
+
+        menubar.add_cascade(label="A Propos", menu=apropos)
+        apropos.add_command(label="Version", command=self.version)
 
         root.config(menu=menubar)
 
     # Quitte
     def quitter(self):
         root.quit()
+
+
+    def version(self):
+        print ("TODO")
+
+    def propriete(self):
+        print ("TODO")
 
     # Lance une nouvelle Partie
     def nouvellePartie(self):

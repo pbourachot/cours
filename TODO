@@ -1,0 +1,27 @@
+27/02:
+
+Exercice a corriger : exercice1 et exercice2
+Liste de questionnaire
+Boite de property avec le nombre de question
+Boite About : Qui l'a fait
+
+root.title("Mon QCM")
+root.minsize(1000,450)
+root.maxsize(1400,850)
+
+
+http://www.xavierdupre.fr/app/teachpyx/helpsphinx/c_gui/tkinter.html
+
+
+
+
+* Prochain cours
+
+Exo 3 :
+    * Gestion des fichiers : 
+    * Gestion des fichiers : librairies os : http://apprendre-python.com/page-gestion-fichiers-dossiers-python
+
+
+* Tetris
+* Puissance4
+* Github
