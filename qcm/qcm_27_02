@@ -1,0 +1,19 @@
+
+# Pour mettre la taille et un titre.
+
+root.title("Mon QCM")
+root.minsize(1000,450)
+root.maxsize(1400,850)
+
+
+# Fonction pour afficher la version.
+
+# Affiche la version
+def version(self):
+        
+        top = Toplevel(root)
+        top.title("Au sujet de ce QCM")
+        msg = Message(top, text="Version xx")
+        msg.pack()
+        button = Button(top, text="Fermer", command=top.destroy)
+        button.pack()

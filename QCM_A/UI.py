@@ -3,21 +3,13 @@
 import tkinter
 import tkinter.ttk as ttk
 import Questions
+from Questions import Questionnaire
 from tkinter.messagebox import showinfo,showerror
-import os.path
-from tkinter import Toplevel
-from tkinter import Message, Button, Entry, StringVar, IntVar
-
-
-FILE_QUESTION = os.path.join(os.path.dirname(os.path.abspath(__file__)),'question.csv')
-
-
+from tkinter import Toplevel, Message, Button
 root = tkinter.Tk()
 root.title("Mon QCM")
 root.minsize(1000,450)
 root.maxsize(1400,850)
-#root.geometry(1400,850)
-
 # Cette classe represente une question
 
 
@@ -26,12 +18,14 @@ class QuestionUI:
     # Constructeur
     def __init__(self):
 
-        self.nbQuestion = IntVar()
-        self.nbQuestion.set(5)
-
         # Label pour l'intitule de la question
         self.intituleQuestion = tkinter.Label(text="Question")
         self.reponseValue = tkinter.StringVar(value="defaultValue")
+
+        self.questionnaire = None
+        self.question = None
+
+        # COMPTEUR self.compteur=0  fois 3
 
         # 3 RadioButtons pour les questions
         self.reponse1 = tkinter.Radiobutton(
@@ -47,35 +41,24 @@ class QuestionUI:
         # Button pour valider, en cliquand sur le bouton valider, on validera la reponse
         self.buttonNouvelleQuestion = ttk.Button(root, text="Nouvelle", command=self.nouvelleQuestion)
 
-        self.questionnaire = None
-        self.questionEnCours = None
+        
 
-        # On initialize la position des Widgets
-        #self.initPosition()
-
-        # Menu
+         # Menu
         menubar = tkinter.Menu(root)
         partiebar = tkinter.Menu(menubar,tearoff=0)
+        aproposbar = tkinter.Menu(menubar, tearoff=0)
 
-        apropos = tkinter.Menu(menubar,tearoff=0)
-        
         menubar.add_cascade(label="Partie", menu=partiebar)
         partiebar.add_command(label="Nouvelle Partie", command=self.nouvellePartie)
         partiebar.add_separator()
-        partiebar.add_command(label="Propriete", command=self.propriete)
-        partiebar.add_separator()
         partiebar.add_command(label="Quitter", command=self.quitter)
 
-        menubar.add_cascade(label="A Propos", menu=apropos)
-        apropos.add_command(label="Version", command=self.version)
+        menubar.add_cascade(label="A Propos", menu=aproposbar)
+        aproposbar.add_command(label="Version", command=self.version)
+        
 
         root.config(menu=menubar)
-
-    # Quitte
-    def quitter(self):
-        root.quit()
-
-
+    
     # Affiche la version
     def version(self):
         
@@ -87,53 +70,31 @@ class QuestionUI:
         button.pack()
 
 
-    def estOKValidation(self,text):
-        print(text)
-        self.nbQuestion = text
-        return True
-
-    def propriete(self):
-        
-        top = Toplevel(root)
-        top.title("Propriete")
-
-        msg = Message(top, text="Nombre de questions")
-        msg.pack()
-
-        question = Entry(top,textvariable = self.nbQuestion)
-
-        question.pack()
-        
-
-
-        button = Button(top, text="Fermer", command=top.destroy)
-        button.pack()
-
-    # Lance une nouvelle Partie
     def nouvellePartie(self):
-        
-        # initialize les widgets
+        # On initialize la position des Widgets
         self.initPosition()
-       #self.nouvelleQuestion()
-
-        self.questionnaire = Questions.Questionnaire('question.csv')
-        self.questionEnCours = self.questionnaire.retourneUnequestionAuHasard()
-        self.afficheQuestion(self.questionEnCours)
+        self.questionnaire = Questionnaire('question.csv')
+        #self.questionnaire.affichage()
+        q = self.questionnaire.retourneUnequestionAuHasard()
+        self.afficheQuestion(q)
+        
+    def quitter(self):
+        root.quit()
 
     # Initialization des widgets, les uns apres les autres
     def initPosition(self):
-
+        
         self.intituleQuestion.pack()
         self.reponse1.pack()
         self.reponse2.pack()
         self.reponse3.pack()
         self.button.pack()
         self.buttonNouvelleQuestion.pack()
-
+    
     # On afficher une question particuliere
     # Parametre de la fonction : question
     def afficheQuestion(self, question):
-
+        self.question = question
         # met a jour l'intitule de la question
         self.intituleQuestion.config(text=question.enonce)
 
@@ -145,21 +106,18 @@ class QuestionUI:
 
     # On valide la reponse
     def valider(self):
-        print("La reponse proposee est %s" % self.reponseValue.get())
-
-        resultat = self.questionEnCours.reponseValide(self.reponseValue.get())
-
-        if (resultat):
-            showinfo("Bonne Reponse")
+        reponseCorrect = self.question.reponseValide(self.reponseValue.get())
+        if reponseCorrect :
+            showinfo('bonne reponse')
         else :
-            showerror("Mauvaise reponse")
-        
+            showerror('mauvaise reponse')
+        #print("La reponse proposee est %s" % self.reponseValue.get())
 
     # Afficher une nouvelle question
     def nouvelleQuestion(self):
-        self.questionEnCours = self.questionnaire.retourneUnequestionAuHasard()
-        self.afficheQuestion(self.questionEnCours)
-
+       q = self.questionnaire.retourneUnequestionAuHasard()
+       self.afficheQuestion(q)
+       
 
 def print_file():                     # voir le chapitre sur les événements
     print("Valider")

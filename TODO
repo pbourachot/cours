@@ -4,6 +4,7 @@ Exercice a corriger : exercice1 et exercice2
 Liste de questionnaire
 Boite de property avec le nombre de question
 Boite About : Qui l'a fait
+Titre et taille de 
 
 root.title("Mon QCM")
 root.minsize(1000,450)
@@ -22,6 +23,23 @@ Exo 3 :
     * Gestion des fichiers : librairies os : http://apprendre-python.com/page-gestion-fichiers-dossiers-python
 
 
-* Tetris
+
+
+Regarder le 12 sur le jeu
+Exercice sur fonction
+Debugger ??
+UTF8 probleme sous visual Code
+
+Aspect graphique : Bouton OK / Fase
+=> Mettre des images
+Nb de bonne reponse, mauvaise reponse
+
+Idee :
+________________
+
+
+
+
 * Puissance4
+* Tetris
 * Github
