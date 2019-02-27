@@ -5,6 +5,8 @@ import tkinter.ttk as ttk
 import Questions
 from tkinter.messagebox import showinfo,showerror
 import os.path
+from tkinter import Toplevel
+from tkinter import Message, Button, Entry, StringVar, IntVar
 
 
 FILE_QUESTION = os.path.join(os.path.dirname(os.path.abspath(__file__)),'question.csv')
@@ -23,6 +25,9 @@ class QuestionUI:
 
     # Constructeur
     def __init__(self):
+
+        self.nbQuestion = IntVar()
+        self.nbQuestion.set(5)
 
         # Label pour l'intitule de la question
         self.intituleQuestion = tkinter.Label(text="Question")
@@ -72,10 +77,38 @@ class QuestionUI:
 
 
     def version(self):
-        print ("TODO")
+        
+        top = Toplevel(root)
+        top.title("Au sujet de ce QCM")
+
+        msg = Message(top, text="Version xx")
+        msg.pack()
+
+        button = Button(top, text="Fermer", command=top.destroy)
+        button.pack()
+
+
+    def estOKValidation(self,text):
+        print(text)
+        self.nbQuestion = text
+        return True
 
     def propriete(self):
-        print ("TODO")
+        
+        top = Toplevel(root)
+        top.title("Propriete")
+
+        msg = Message(top, text="Nombre de questions")
+        msg.pack()
+
+        question = Entry(top,textvariable = self.nbQuestion)
+
+        question.pack()
+        
+
+
+        button = Button(top, text="Fermer", command=top.destroy)
+        button.pack()
 
     # Lance une nouvelle Partie
     def nouvellePartie(self):
