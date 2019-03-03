@@ -1,6 +1,10 @@
 import random
 
 import pickle
+import os
+
+DATA_FOLDER = os.path.join(os.path.dirname(__file__),'data')
+QUESTION_FILE = os.path.join(DATA_FOLDER,'question.csv')
 
 class Question:
 
@@ -41,7 +45,7 @@ def lireQ():
 
 def lireQcsv():
     quest = Questionnaire()
-    fichier=open('question.csv')
+    fichier=open(QUESTION_FILE)
     lignes=fichier.readlines()
     fichier.close()
     print(lignes)
@@ -108,7 +112,7 @@ class Questionnaire:
 
 
 
-
+'''
 ques = lireQcsv() 
 ques.affichage()
 
@@ -123,7 +127,7 @@ ques3 = Questionnaire('question2.csv')
 ques3.affichage()
 question = ques3.retourneUnequestionAuHasard()
 question.affichage()
-
+'''
 
 
 
