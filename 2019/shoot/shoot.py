@@ -4,6 +4,7 @@
 # Video link: https://www.youtube.com/watch?v=nGufy7weyGY
 # Player sprite and movement
 # http://kidscancode.org/img/shmup_sample.gif
+#This is a test
 
 import pygame
 import random
